@@ -2,6 +2,7 @@ import { Route, createBrowserRouter, createRoutesFromElements } from 'react-rout
 import { Root } from '../pages'
 import { Login, Register } from '../pages/auth'
 import { RequireAuth } from '.'
+import { Chat } from '../pages/chat/chat'
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -10,14 +11,19 @@ export const router = createBrowserRouter(
         <Route
           path="/"
           element={<Root />}
-        />
+        >
+          <Route
+            path="chat/:id"
+            element={<Chat />}
+          />
+        </Route>
       </Route>
       <Route
-        path="/login"
+        path="login"
         element={<Login />}
       />
       <Route
-        path="/register"
+        path="register"
         element={<Register />}
       />
     </>
