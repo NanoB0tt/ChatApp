@@ -1,4 +1,4 @@
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, FormControl, FormLabel } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogHeader, AlertDialogOverlay, Button, FormControl, FormLabel } from "@chakra-ui/react";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -33,7 +33,6 @@ export function ChangeUserProfile({ isOpen, onClose }: AlertProps) {
     } catch (err) {
       console.log(err);
     }
-    console.log(formData)
   }
 
   return (
@@ -49,29 +48,27 @@ export function ChangeUserProfile({ isOpen, onClose }: AlertProps) {
               Search File
             </AlertDialogHeader>
 
-            <AlertDialogBody>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <FormControl >
+            <AlertDialogBody pb='1.5rem'>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gridTemplateRows: '1fr 3rem'
+                }}
+              >
+                <FormControl padding='4' gridColumn='span 2'>
                   <FormLabel>File</FormLabel>
                   <input {...register("picture")} type="file" />
                 </FormControl>
-                <Button ref={cancelRef} onClick={onClose}>
+                <Button ref={cancelRef} onClick={onClose} gridColumn='1/2' alignSelf='end'>
                   Cancel
                 </Button>
-                <Button colorScheme='red' type="submit" onClick={onClose} ml={3}>
+                <Button colorScheme='red' type="submit" onClick={onClose} ml={3} gridColumn='2/3' alignSelf='end'>
                   Accept
                 </Button>
               </form>
             </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
-                Cancel
-              </Button>
-              <Button colorScheme='red' type="submit" onClick={onClose} ml={3}>
-                Accept
-              </Button>
-            </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
