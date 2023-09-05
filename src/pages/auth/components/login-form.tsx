@@ -5,6 +5,7 @@ import { useAuth } from "../../../context";
 import axios from "../../../api/axios";
 import { LoginInput } from "../interfaces/interfaces";
 import { User } from "../../../context/interfaces";
+import socket from "../../../socket";
 
 const LOGIN_URL = '/api/auth/login';
 
@@ -29,8 +30,11 @@ export function LoginForm() {
         }
       );
       if (res.status === 201) {
-        console.log(res.data)
-        setAuth(res.data);
+        const user = res.data;
+        console.log(user)
+        setAuth(user);
+        socket.auth = { id: user.id }
+        socket.connect();
         setTimeout(() => {
           navigate("/",);
         }, 1000);
