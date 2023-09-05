@@ -15,7 +15,7 @@ interface Props {
   type: "login" | "register";
 }
 
-export default function FormLayout({ children, type }: Props) {
+export function FormLayout({ children, type }: Props) {
   return (
 
     <Flex
@@ -50,7 +50,7 @@ export default function FormLayout({ children, type }: Props) {
                     : "You have an account?"
                   }
                 </Text>
-                <Link color={'blue.400'} as={LinkRoute} to={type === "login" ? `/register/` : `/login/`}>
+                <Link color={'blue.400'} as={LinkRoute} to={type === "login" ? `register` : `login`}>
                   {type === "login"
                     ? "Register"
                     : "Login"
