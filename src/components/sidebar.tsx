@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserProfile } from "./user-profile";
 import { Friends } from "./friends";
 import { SearchFriends } from "./search-friends";
@@ -8,24 +8,26 @@ import { Box, Button, Grid } from "@chakra-ui/react";
 
 export function Sidebar() {
   const [showFriendRequest, setShowFriendRequest] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+
+  useEffect(() => {
+    console.log(isSearching)
+  }, [isSearching])
 
   return (
-    <Box bg='tomato' w='md' h='full'>
+    <Box bg='tomato'>
       <UserProfile />
-      <Grid templateColumns='1fr 1fr'>
-        <SearchFriends />
+      <SearchFriends setIsSearching={setIsSearching} />
+      <Grid templateColumns='1fr 1fr' gap='0.5rem' m='0.5rem'>
         <Button
-          onClick={() => setShowFriendRequest(false)}
-          gridColumn='1'
-          gridRow='2'
-        >boton 1</Button>
+          onClick={() => !isSearching && setShowFriendRequest(false)}
+        >Friends</Button>
         <Button
-          onClick={() => setShowFriendRequest(true)}
-          gridColumn='2'
-          gridRow='2'
-        >boton 2</Button>
+          onClick={() => !isSearching && setShowFriendRequest(true)}
+        >Invitations</Button>
       </Grid>
-      {!showFriendRequest
+      {!isSearching &&
+        !showFriendRequest
         ? <Friends />
         : <FriendRequests />
       }
