@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { User } from "../context/interfaces";
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
+import { Link as LinkRoute } from "react-router-dom";
+import { FriendProfile } from "./friend-profile";
 
 const REQUEST_MY_FRIENDS_URL = '/api/user/friend-request/me/friends'
 
@@ -23,18 +25,13 @@ export function Friends() {
   }, [])
 
   return (
-    <>
+    <Box>
       {friends?.map((friend: User) => (
-        <Flex key={nanoid()} alignItems='center' p='2' h='32' border='2px' borderColor='blue'>
-          <Avatar src={friend.imagePath} size='xl' />
-          <Box ml='3'>
-            <Text fontWeight='normal' fontSize='3xl'>
-              {friend.userName}
-            </Text>
-          </Box>
-        </Flex>
+        <LinkRoute to={`chat/${friend.id}`} key={nanoid()} >
+          <FriendProfile friend={friend} ></FriendProfile>
+        </LinkRoute>
       ))
       }
-    </>
+    </Box>
   )
 }
