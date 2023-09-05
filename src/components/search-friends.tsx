@@ -1,21 +1,20 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { User } from "../context/interfaces";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
-import { Box, Input } from "@chakra-ui/react";
+import { Box, Button, Input } from "@chakra-ui/react";
 import { FriendProfile } from "./friend-profile";
 
 const SEARCH_FRIENDS_URL = '/api/user/search/friend/';
 const SEND_FRIEND_REQUEST_URL = '/api/user/friend-request/send/'
 
 interface Props {
-  setIsSearching: Dispatch<SetStateAction<boolean>>
+  setSearching: Dispatch<SetStateAction<boolean>>
 }
 
-export function SearchFriends({ setIsSearching }: Props) {
+export function SearchFriends({ setSearching }: Props) {
   const axiosPrivate = useAxiosPrivate();
-  const [searchFriends, setSearchFriends] = useState<User[]>();
+  const [searchFriends, setSearchFriends] = useState<User[]>([]);
   const [searchInput, setSearchInput] = useState('');
-  const isFriendRequest = true;
 
 
   useEffect(() => {
@@ -23,11 +22,11 @@ export function SearchFriends({ setIsSearching }: Props) {
       try {
         if (searchInput.length >= 3) {
           const response = await axiosPrivate.get(SEARCH_FRIENDS_URL + searchInput);
-          setSearchFriends(response.data)
-          setIsSearching(true)
+          setSearchFriends(response.data);
+          setSearching(true);
         } else if (searchInput.length < 3) {
-          setSearchFriends([])
-          setIsSearching(false)
+          setSearchFriends([]);
+          setSearching(false);
         }
       } catch (error) {
         console.log(error);
@@ -46,15 +45,20 @@ export function SearchFriends({ setIsSearching }: Props) {
   }
 
   return (
-    <>
-      <Box m='0.5rem 0.5rem 0rem'>
-        <Input
-          placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)}
-        ></Input>
-      </Box>
-      {searchFriends?.map((friend: User) => (
-        <FriendProfile friend={friend} isFriendRequest={isFriendRequest} sendFriendRequest={sendFriendRequest}></FriendProfile>
-      ))}
-    </>
+    <Box>
+      <Input
+        placeholder="Search..."
+        onChange={(e) => setSearchInput(e.target.value)}
+      ></Input>
+      {searchFriends.length > 0 && (
+        <Box height='20rem' overflowY='scroll'>
+          {searchFriends.map((friend: User) => (
+            <FriendProfile friend={friend}>
+              <Button onClick={() => sendFriendRequest(friend.id)}>Invite</Button>
+            </FriendProfile>
+          ))}
+        </Box>
+      )}
+    </Box>
   )
 }
