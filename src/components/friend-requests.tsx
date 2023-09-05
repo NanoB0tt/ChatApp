@@ -50,14 +50,20 @@ export function FriendRequests() {
           <Button
             borderRadius='full'
             width='1'
-            onClick={() => respondToFriendRequest(request.creator.id, 'accepted')}
+            onClick={() => {
+              respondToFriendRequest(request.creator.id, 'accepted')
+              setFriendRequests(friendRequests.filter(req => req.creator.id !== request.creator.id))
+            }}
           >
             <CheckIcon />
           </Button>
           <Button
             borderRadius='full'
             width='1'
-            onClick={() => respondToFriendRequest(request.creator.id, 'rejected')}
+            onClick={() => {
+              respondToFriendRequest(request.creator.id, 'rejected')
+              setFriendRequests(friendRequests.filter(req => req.creator.id !== request.creator.id))
+            }}
           >
             <CloseIcon />
           </Button>
