@@ -9,7 +9,7 @@ export function UserProfile() {
 
   return (
     <>
-      <Flex alignItems='center' p='2' border='2px' borderColor='blue' h='32'>
+      <Flex alignItems='center' p='2' h='100%'>
         <Grid alignItems='center' justifyItems='center'>
           <Avatar src={auth?.imagePath} w='5rem' h='5rem' gridRow='1' gridColumn='1' />
           <Avatar
