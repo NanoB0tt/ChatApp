@@ -1,7 +1,8 @@
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogHeader, AlertDialogOverlay, Button, FormControl, FormLabel } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogHeader, AlertDialogOverlay, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useAuth } from "../context";
 
 interface AlertProps {
   isOpen: boolean;
@@ -18,18 +19,19 @@ export function ChangeUserProfile({ isOpen, onClose }: AlertProps) {
   const axiosPrivate = useAxiosPrivate();
   const cancelRef = useRef<HTMLButtonElement | null>(null)
   const { register, handleSubmit } = useForm<FileInput>();
+  const { auth, setAuth } = useAuth();
 
   const onSubmit: SubmitHandler<FileInput> = async (data) => {
     const formData = new FormData()
     formData.append('file', data.picture[0])
     try {
-      await axiosPrivate.post(FILE_URL,
+      const photoData = await axiosPrivate.post(FILE_URL,
         formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      }
-      );
+      });
+      auth && setAuth({ ...auth, imagePath: photoData.data.secureUrl })
     } catch (err) {
       console.log(err);
     }
@@ -59,7 +61,7 @@ export function ChangeUserProfile({ isOpen, onClose }: AlertProps) {
               >
                 <FormControl padding='4' gridColumn='span 2'>
                   <FormLabel>File</FormLabel>
-                  <input {...register("picture")} type="file" />
+                  <Input border='0' {...register("picture")} type="file" />
                 </FormControl>
                 <Button ref={cancelRef} onClick={onClose} gridColumn='1/2' alignSelf='end'>
                   Cancel
