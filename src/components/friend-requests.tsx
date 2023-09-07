@@ -4,6 +4,7 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { FriendProfile } from "./friend-profile";
+import { useFriends } from "../context/friend-context";
 
 const RECEIVED_REQUEST_URL = '/api/user/friend-request/me/received-requests';
 const RESPOND_FRIEND_REQUEST_URL = '/api/user/friend-request/response/'
@@ -11,6 +12,7 @@ const RESPOND_FRIEND_REQUEST_URL = '/api/user/friend-request/response/'
 export function FriendRequests() {
   const axiosPrivate = useAxiosPrivate();
   const [friendRequests, setFriendRequests] = useState<FriendRequest[]>();
+  const { friends, setFriends } = useFriends();
 
 
 
@@ -49,8 +51,9 @@ export function FriendRequests() {
                   borderRadius='full'
                   width='1'
                   onClick={() => {
-                    respondToFriendRequest(request.creator.id, 'accepted')
+                    respondToFriendRequest(friend.id, 'accepted')
                     setFriendRequests(friendRequests.filter(req => req.creator.id !== request.creator.id))
+                    friends && setFriends([...friends, friend])
                   }}
                 >
                   <CheckIcon />
@@ -59,7 +62,7 @@ export function FriendRequests() {
                   borderRadius='full'
                   width='1'
                   onClick={() => {
-                    respondToFriendRequest(request.creator.id, 'rejected')
+                    respondToFriendRequest(friend.id, 'rejected')
                     setFriendRequests(friendRequests.filter(req => req.creator.id !== request.creator.id))
                   }}
                 >
