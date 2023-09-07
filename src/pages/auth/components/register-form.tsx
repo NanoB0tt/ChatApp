@@ -1,49 +1,44 @@
-import { Button, FormControl, FormLabel, Input, Stack } from "@chakra-ui/react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { Button, FormControl, FormErrorMessage, FormLabel, Input, Stack } from "@chakra-ui/react";
+import { useForm } from "react-hook-form"
 import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import axios from "../../../api/axios";
-import { RegisterInput } from "../interfaces/interfaces";
+import { useAxiosPrivate } from "../../../hooks/useAxiosPrivate";
 
 const REGISTER_URL = '/api/auth/register';
 
-const notification = () => {
+function notification() {
   notifySuccess();
   setTimeout(() => {
     notifyRedirect();
   }, 1000)
 }
 
-const notifySuccess = () =>
+function notifySuccess() {
   toast.success(
     'Your account was created successfully!',
     { duration: 1000 }
   );
+}
 
-const notifyRedirect = () =>
+function notifyRedirect() {
   toast.loading(
     'Redirecting...',
     { duration: 1000 }
   )
+}
 
 export function RegisterForm() {
+  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm({
-    defaultValues: {
-      userName: "",
-      email: "",
-      password: "",
-    },
-  });
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit: SubmitHandler<RegisterInput> = async (data) => {
+  async function onSubmit(data: any): Promise<void> {
     try {
-      let res = await axios.post(REGISTER_URL,
+      let res = await axiosPrivate.post(REGISTER_URL,
         JSON.stringify(data),
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true
         }
       );
       if (res.status === 201) {
@@ -59,29 +54,39 @@ export function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isRequired>
+      <FormControl isRequired isInvalid={!!errors.userName}>
         <FormLabel>Username</FormLabel>
-        <Controller
-          name="userName"
-          control={control}
-          render={({ field }) => <Input type="text" {...field} />}
+        <Input
+          type="text"
+          {...register("userName", { maxLength: 20, minLength: 3 })}
         />
+        {errors.userName &&
+          <FormErrorMessage>Username must be between 3 and 20 characters in length.</FormErrorMessage>
+        }
       </FormControl>
-      <FormControl isRequired>
+      <FormControl isRequired isInvalid={!!errors.email}>
         <FormLabel>Email Address</FormLabel>
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => <Input type="email" {...field} />}
+        <Input
+          type="text"
+          {...register("email", {
+            pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          })}
         />
+        {errors.email &&
+          <FormErrorMessage>Invalid email format. Please enter a valid email address.</FormErrorMessage>
+        }
       </FormControl>
-      <FormControl isRequired>
+      <FormControl isRequired isInvalid={!!errors.password}>
         <FormLabel>Password</FormLabel>
-        <Controller
-          name="password"
-          control={control}
-          render={({ field }) => <Input type="password" {...field} />}
+        <Input
+          type="password"
+          {...register("password", {
+            pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
+          })}
         />
+        {errors.password &&
+          <FormErrorMessage>Password must contain at least one digit, one lowercase letter, one uppercase letter, and be 6 to 15 characters long.</FormErrorMessage>
+        }
       </FormControl>
       <Stack spacing={10} pt={2}>
         <Button
