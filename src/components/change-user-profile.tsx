@@ -1,7 +1,7 @@
 import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogHeader, AlertDialogOverlay, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { useRef } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useAuth } from "../context";
 
 interface AlertProps {
@@ -21,7 +21,7 @@ export function ChangeUserProfile({ isOpen, onClose }: AlertProps) {
   const { register, handleSubmit } = useForm<FileInput>();
   const { auth, setAuth } = useAuth();
 
-  const onSubmit: SubmitHandler<FileInput> = async (data) => {
+  async function onSubmit(data: any): Promise<void> {
     const formData = new FormData()
     formData.append('file', data.picture[0])
     try {
