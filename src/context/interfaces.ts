@@ -21,3 +21,10 @@ export interface AuthContextProps {
 export interface AuthProviderProps {
   children: ReactNode;
 }
+
+export interface FriendContextProps {
+  friends: User[] | null;
+  setFriends: Dispatch<User[]>;
+}
+
+export interface FriendProviderProps extends AuthProviderProps { }
