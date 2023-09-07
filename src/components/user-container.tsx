@@ -4,10 +4,7 @@ import UserSocial from "./user-social";
 
 export default function UserContainer() {
   return (
-    <Grid
-      h='32'
-      templateColumns='1fr auto 2rem'
-    >
+    <Grid templateColumns='1fr auto 2rem'>
       <UserProfile />
       <UserSocial />
     </Grid>
