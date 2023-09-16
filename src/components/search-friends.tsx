@@ -3,6 +3,9 @@ import { User } from "../context/interfaces";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { Box, Button, Input } from "@chakra-ui/react";
 import { FriendProfile } from "./friend-profile";
+import { nanoid } from "nanoid";
+import socket from "../socket";
+import { useAuth } from "../context";
 
 const SEARCH_FRIENDS_URL = '/api/user/search/friend/';
 const SEND_FRIEND_REQUEST_URL = '/api/user/friend-request/send/'
@@ -15,6 +18,7 @@ export function SearchFriends({ setSearching }: Props) {
   const axiosPrivate = useAxiosPrivate();
   const [searchFriends, setSearchFriends] = useState<User[]>([]);
   const [searchInput, setSearchInput] = useState('');
+  const { auth } = useAuth();
 
 
   useEffect(() => {
@@ -39,6 +43,7 @@ export function SearchFriends({ setSearching }: Props) {
   async function sendFriendRequest(id: string) {
     try {
       await axiosPrivate.post(SEND_FRIEND_REQUEST_URL + id);
+      socket.emit("invitationSend", auth)
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +58,7 @@ export function SearchFriends({ setSearching }: Props) {
       {searchFriends.length > 0 && (
         <Box height='20rem' overflowY='scroll'>
           {searchFriends.map((friend: User) => (
-            <FriendProfile friend={friend}>
+            <FriendProfile friend={friend} key={nanoid()}>
               <Button onClick={() => sendFriendRequest(friend.id)}>Invite</Button>
             </FriendProfile>
           ))}

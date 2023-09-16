@@ -5,6 +5,9 @@ import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { FriendProfile } from "./friend-profile";
 import { useFriends } from "../context/friend-context";
+import socket from "../socket";
+import { useAuth } from "../context";
+import { nanoid } from "nanoid";
 
 const RECEIVED_REQUEST_URL = '/api/user/friend-request/me/received-requests';
 const RESPOND_FRIEND_REQUEST_URL = '/api/user/friend-request/response/'
@@ -13,6 +16,7 @@ export function FriendRequests() {
   const axiosPrivate = useAxiosPrivate();
   const [friendRequests, setFriendRequests] = useState<FriendRequest[]>();
   const { friends, setFriends } = useFriends();
+  const { auth } = useAuth();
 
 
 
@@ -26,6 +30,12 @@ export function FriendRequests() {
       }
     }
     getFriendRequests();
+    socket.on('invitationRecieved', (message) => {
+      if (friendRequests) {
+        setFriendRequests([...friendRequests as FriendRequest[], message]);
+      }
+      setFriendRequests([message]);
+    })
   }, [])
 
 
@@ -34,6 +44,9 @@ export function FriendRequests() {
     try {
       await axiosPrivate.put(RESPOND_FRIEND_REQUEST_URL + id,
         JSON.stringify(data));
+      if (status === 'accepted') {
+        socket.emit('responseToRequest', auth);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +58,7 @@ export function FriendRequests() {
         friendRequests?.map((request: FriendRequest) => {
           const friend = request.creator;
           return (
-            <FriendProfile friend={friend}>
+            <FriendProfile friend={friend} key={nanoid()}>
               <Flex gap='0.5rem'>
                 <Button
                   borderRadius='full'

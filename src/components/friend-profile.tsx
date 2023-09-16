@@ -10,7 +10,7 @@ interface Props {
 
 export function FriendProfile({ friend, isHeader, children }: Props) {
   return (
-    <Flex alignItems='center' p='2' h={isHeader ? '4.4rem' : '5rem'} border='2px' borderColor='blue' _hover={{
+    <Flex alignItems='center' justifyContent='space-between' p='2' h={isHeader ? '4.4rem' : '5rem'} border='2px' borderColor='blue' _hover={{
       cursor: "pointer"
     }}>
       <Flex alignItems='center'>

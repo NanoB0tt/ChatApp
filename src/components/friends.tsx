@@ -6,12 +6,15 @@ import { nanoid } from "nanoid";
 import { Link as LinkRoute } from "react-router-dom";
 import { FriendProfile } from "./friend-profile";
 import { useFriends } from "../context/friend-context";
+import socket from "../socket";
+import { useAuth } from "../context";
 
 const REQUEST_MY_FRIENDS_URL = '/api/user/friend-request/me/friends'
 
 export function Friends() {
   const axiosPrivate = useAxiosPrivate();
   const { friends, setFriends } = useFriends();
+  const { auth } = useAuth();
 
   useEffect(() => {
     const getFriends = async () => {
@@ -23,6 +26,14 @@ export function Friends() {
       }
     }
     getFriends();
+    socket.on('addFriend', (message) => {
+      if (auth?.id !== message.id) {
+        if (friends) {
+          setFriends([...friends, message]);
+        }
+        setFriends([message]);
+      }
+    })
   }, [])
 
   return (
