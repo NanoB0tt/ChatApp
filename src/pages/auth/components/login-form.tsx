@@ -2,11 +2,12 @@ import { Button, FormControl, FormErrorMessage, FormLabel, Input, Stack } from "
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context";
-import axios from "../../../api/axios";
 import { User } from "../../../context/interfaces";
 import socket from "../../../socket";
 import { useState } from 'react';
 import { useAxiosPrivate } from "../../../hooks/useAxiosPrivate";
+import { notification } from "./notify";
+import { Toaster } from "react-hot-toast";
 
 const LOGIN_URL = '/api/auth/login';
 
@@ -32,9 +33,10 @@ export function LoginForm() {
         setAuth(user);
         socket.auth = { id: user.id }
         socket.connect();
+        notification('login')
         setTimeout(() => {
           navigate("/",);
-        }, 1000);
+        }, 2000);
 
       }
     } catch (err: any) {
@@ -81,6 +83,7 @@ export function LoginForm() {
           Sign in
         </Button>
       </Stack>
+      <Toaster />
     </form>
   )
 }
