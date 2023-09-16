@@ -1,35 +1,18 @@
 import { Button, FormControl, FormErrorMessage, FormLabel, Input, Stack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form"
-import { Toaster, toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAxiosPrivate } from "../../../hooks/useAxiosPrivate";
+import { useState } from "react";
+import { notification } from "./notify";
 
 const REGISTER_URL = '/api/auth/register';
 
-function notification() {
-  notifySuccess();
-  setTimeout(() => {
-    notifyRedirect();
-  }, 1000)
-}
-
-function notifySuccess() {
-  toast.success(
-    'Your account was created successfully!',
-    { duration: 1000 }
-  );
-}
-
-function notifyRedirect() {
-  toast.loading(
-    'Redirecting...',
-    { duration: 1000 }
-  )
-}
 
 export function RegisterForm() {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+  const [alreadyExist, setAlreadyExist] = useState(false)
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -42,13 +25,16 @@ export function RegisterForm() {
         }
       );
       if (res.status === 201) {
-        notification();
+        setAlreadyExist(false)
+        notification('register');
         setTimeout(() => {
           navigate("/login/");
         }, 2000);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      if (err.response.data.message.includes('already exists')) {
+        setAlreadyExist(true)
+      }
     }
   }
 
@@ -64,7 +50,7 @@ export function RegisterForm() {
           <FormErrorMessage>Username must be between 3 and 20 characters in length.</FormErrorMessage>
         }
       </FormControl>
-      <FormControl isRequired isInvalid={!!errors.email}>
+      <FormControl isRequired isInvalid={!!errors.email || alreadyExist}>
         <FormLabel>Email Address</FormLabel>
         <Input
           type="text"
@@ -74,6 +60,9 @@ export function RegisterForm() {
         />
         {errors.email &&
           <FormErrorMessage>Invalid email format. Please enter a valid email address.</FormErrorMessage>
+        }
+        {alreadyExist &&
+          <FormErrorMessage>This email already exists</FormErrorMessage>
         }
       </FormControl>
       <FormControl isRequired isInvalid={!!errors.password}>
