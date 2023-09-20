@@ -6,7 +6,11 @@ import UserContainer from "./user-container";
 export function Sidebar() {
 
   return (
-    <Grid bg='tomato' height='100vh' templateRows='7rem auto'>
+    <Grid
+      bg='hsl(213.3, 13.4%, 13.1%)'
+      height='100vh'
+      templateRows='7rem auto'
+    >
       <UserContainer />
       <Friends />
     </Grid>

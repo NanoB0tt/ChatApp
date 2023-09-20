@@ -4,7 +4,7 @@ import UserSocial from "./user-social";
 
 export default function UserContainer() {
   return (
-    <Grid templateColumns='1fr auto 2rem'>
+    <Grid templateColumns='1fr 3rem' paddingX='2rem'>
       <UserProfile />
       <UserSocial />
     </Grid>

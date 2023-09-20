@@ -9,7 +9,7 @@ export default function UserSocial() {
   const [isSearching, setSearching] = useState(false);
   return (
     <>
-      <Button onClick={onOpen} size='md' padding='0' borderRadius='full' marginTop='0.5rem'>
+      <Button onClick={onOpen} w='2.5rem' h='2.5rem' padding='0' borderRadius='full' marginTop='0.5rem'>
         <FaUserPlus />
       </Button>
 

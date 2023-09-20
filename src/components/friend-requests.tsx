@@ -53,7 +53,22 @@ export function FriendRequests() {
   }
 
   return (
-    <Box height='20rem' overflowY='scroll'>
+    <Box
+      height='20rem'
+      overflowY='scroll'
+      sx={{
+        '&::-webkit-scrollbar': {
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          width: '6px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'hsl(203.1, 25.5%, 90%)',
+          borderRadius: '24px',
+        },
+      }}
+    >
       {
         friendRequests?.map((request: FriendRequest) => {
           const friend = request.creator;

@@ -21,14 +21,14 @@ export function UserProfile() {
             icon={<SettingsIcon boxSize='8' />}
             zIndex='1'
             _hover={{
-              color: "red",
+              color: 'hsl(203.1, 25.5%, 90%)',
               backdropFilter: 'blur(2px)'
             }}
             onClick={onOpen}
           />
         </Grid>
         <Box ml='3'>
-          <Text fontWeight='normal' fontSize='3xl'>
+          <Text fontWeight='semibold' fontSize='3xl'>
             {auth?.userName}
           </Text>
         </Box>

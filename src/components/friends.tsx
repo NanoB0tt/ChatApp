@@ -15,6 +15,7 @@ export function Friends() {
   const axiosPrivate = useAxiosPrivate();
   const { friends, setFriends } = useFriends();
   const { auth } = useAuth();
+  const { selectedFriend } = useFriends();
 
   useEffect(() => {
     const getFriends = async () => {
@@ -37,10 +38,24 @@ export function Friends() {
   }, [])
 
   return (
-    <Box overflowY='scroll'>
+    <Box
+      overflowY='auto'
+      sx={{
+        '&::-webkit-scrollbar': {
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          width: '6px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'hsl(203.1, 25.5%, 90%)',
+          borderRadius: '24px',
+        },
+      }}
+    >
       {friends?.map((friend: User) => (
         <LinkRoute to={`chat/${friend.id}`} key={nanoid()} >
-          <FriendProfile friend={friend} ></FriendProfile>
+          <FriendProfile friend={friend} isSelected={friend.id === selectedFriend} ></FriendProfile>
         </LinkRoute>
       ))
       }

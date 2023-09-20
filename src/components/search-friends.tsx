@@ -56,7 +56,22 @@ export function SearchFriends({ setSearching }: Props) {
         onChange={(e) => setSearchInput(e.target.value)}
       ></Input>
       {searchFriends.length > 0 && (
-        <Box height='20rem' overflowY='scroll'>
+        <Box
+          height='20rem'
+          overflowY='auto'
+          sx={{
+            '&::-webkit-scrollbar': {
+              width: '4px',
+            },
+            '&::-webkit-scrollbar-track': {
+              width: '6px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: 'hsl(203.1, 25.5%, 90%)',
+              borderRadius: '24px',
+            },
+          }}
+        >
           {searchFriends.map((friend: User) => (
             <FriendProfile friend={friend} key={nanoid()}>
               <Button onClick={() => sendFriendRequest(friend.id)}>Invite</Button>
