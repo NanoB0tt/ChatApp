@@ -5,9 +5,10 @@ const FriendContext = createContext<FriendContextProps | undefined>(undefined);
 
 export function FriendProvider({ children }: FriendProviderProps) {
   const [friends, setFriends] = useState<User[] | null>(null)
+  const [selectedFriend, setSelectedFriend] = useState<string | undefined>();
 
   return (
-    <FriendContext.Provider value={{ friends, setFriends }}>
+    <FriendContext.Provider value={{ friends, setFriends, selectedFriend, setSelectedFriend }}>
       {children}
     </FriendContext.Provider>
   )
