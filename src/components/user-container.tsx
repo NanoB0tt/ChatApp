@@ -1,8 +1,8 @@
 import { Flex } from "@chakra-ui/react";
 import { UserProfile } from "./user-profile";
-import UserSocial from "./user-social";
+import { UserSocial } from "./user-social";
 
-export default function UserContainer() {
+export function UserContainer() {
   return (
     <Flex
       paddingX="2rem"

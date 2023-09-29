@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import socket from "../../socket";
+import socket from "@socket";
 import { Box, Button, Container } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
-import { User } from "../../context/interfaces";
-import { useAuth } from "../../context";
-import { FriendProfile } from "../../components/friend-profile";
+import { User } from "@context/interfaces";
+import { useAuth, useFriends } from "@context";
+import { FriendProfile } from "@components";
 import { Messages, getAllMessages, getRoom, getUser } from "./helpers";
-import { SendMessage } from "./components/send-message";
-import { Conversations } from "./components/conversations";
-import { useFriends } from "../../context/friend-context";
+import { SendMessage, Conversations } from "@chat/components";
 import { AiFillHome } from "react-icons/ai";
 
 export function Chat() {

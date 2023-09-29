@@ -8,14 +8,14 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context";
-import { User } from "../../../context/interfaces";
-import socket from "../../../socket";
+import { useAuth } from "@context";
+import { User } from "@context/interfaces";
+import socket from "@socket";
 import { useState } from "react";
-import { useAxiosPrivate } from "../../../hooks/useAxiosPrivate";
-import { notification } from "./notify";
+import { useAxiosPrivate } from "@customHooks";
+import { notification } from "./helpers/notify";
 import { Toaster } from "react-hot-toast";
-import { LOGIN_URL } from "../../../api/routes";
+import { LOGIN_URL } from "@api/routes";
 
 export function LoginForm() {
   const axiosPrivate = useAxiosPrivate();

@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
-import { axiosPrivate } from "../../api/axios";
+import { axiosPrivate } from "@api/axios";
 import {
   RECEIVED_REQUEST_URL,
   RESPOND_FRIEND_REQUEST_URL,
-} from "../../api/routes";
-import { FriendRequest, User } from "../../context/interfaces";
-import socket from "../../socket";
+} from "@api/routes";
+import { FriendRequest, User } from "@context/interfaces";
+import socket from "@socket";
 import { NavigateFunction } from "react-router-dom";
 
 export async function getFriendRequests(

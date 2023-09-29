@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-import { BASE_URL } from "./api/axios";
+import { BASE_URL } from "../api/routes";
 
 const socket = io(BASE_URL, { autoConnect: false });
 

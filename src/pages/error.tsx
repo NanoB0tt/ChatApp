@@ -1,7 +1,7 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
-export default function ErrorPage() {
+export function ErrorPage() {
   const error = useRouteError();
   let errorMessage: string;
 

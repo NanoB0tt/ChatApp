@@ -9,11 +9,11 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
+import { useAxiosPrivate } from "@customHooks";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../context";
-import { FILE_URL } from "../api/routes";
+import { useAuth } from "@context";
+import { FILE_URL } from "@api/routes";
 import { useNavigate } from "react-router-dom";
 
 interface AlertProps {

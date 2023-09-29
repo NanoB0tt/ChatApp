@@ -1,10 +1,10 @@
-import socket from "../../../socket";
+import socket from "@socket";
 import { Button, Flex, Input, FormControl } from "@chakra-ui/react";
-import { axiosPrivate } from "../../../api/axios";
+import { axiosPrivate } from "@api/axios";
 import { useForm } from "react-hook-form";
 import { Messages } from "../helpers";
 import { Dispatch, SetStateAction } from "react";
-import { ADD_MESSAGE } from "../../../api/routes";
+import { ADD_MESSAGE } from "@api/routes";
 import { useNavigate } from "react-router-dom";
 
 interface Props {

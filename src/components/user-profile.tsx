@@ -1,6 +1,6 @@
 import { SettingsIcon } from "@chakra-ui/icons";
 import { Avatar, Box, Flex, Grid, Text, useDisclosure } from "@chakra-ui/react";
-import { useAuth } from "../context";
+import { useAuth } from "@context";
 import { ChangeUserProfile } from "./change-user-profile";
 
 export function UserProfile() {

@@ -1,6 +1,6 @@
 import { UnorderedList } from "@chakra-ui/react";
 import { Messages } from "../helpers";
-import { useAuth } from "../../../context";
+import { useAuth } from "@context";
 import { MessageBubbles } from "./message-bubbles";
 import { nanoid } from "nanoid";
 

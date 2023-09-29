@@ -3,11 +3,10 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { Root } from "../pages";
-import { Login, Register } from "../pages/auth";
+import { Root, ErrorPage } from "@pages/index";
+import { Login, Register } from "@pages/auth";
+import { Chat } from "@pages/chat/chat";
 import { RequireAuth } from ".";
-import { Chat } from "../pages/chat/chat";
-import ErrorPage from "../pages/error";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

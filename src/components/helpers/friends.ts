@@ -1,8 +1,8 @@
 import { Dispatch } from "react";
-import { axiosPrivate } from "../../api/axios";
-import { User } from "../../context/interfaces";
-import { REQUEST_MY_FRIENDS_URL } from "../../api/routes";
-import socket from "../../socket";
+import { axiosPrivate } from "@api/axios";
+import { User } from "@context/interfaces";
+import { REQUEST_MY_FRIENDS_URL } from "@api/routes";
+import socket from "@socket";
 
 export async function getFriends(setFriends: Dispatch<User[]>) {
   try {

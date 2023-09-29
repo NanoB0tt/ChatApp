@@ -1,5 +1,5 @@
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
-import { User } from "../context/interfaces";
+import { User } from "@context/interfaces";
 import { ReactNode } from "react";
 
 interface Props {
@@ -38,8 +38,8 @@ export function FriendProfile({
         isHeader
           ? "hsl(213.3, 13.4%, 13.1%)"
           : isSelected
-          ? "hsl(213.1, 19.5%, 29.2%)"
-          : "inherit"
+            ? "hsl(213.1, 19.5%, 29.2%)"
+            : "inherit"
       }
       gridRow={isHeader ? "1/2" : ""}
       gridColumn={isHeader ? "1/2" : ""}

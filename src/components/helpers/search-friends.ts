@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { axiosPrivate } from "../../api/axios";
-import socket from "../../socket";
-import { User } from "../../context/interfaces";
-import { SEARCH_FRIENDS_URL, SEND_FRIEND_REQUEST_URL } from "../../api/routes";
+import { axiosPrivate } from "@api/axios";
+import socket from "@socket";
+import { User } from "@context/interfaces";
+import { SEARCH_FRIENDS_URL, SEND_FRIEND_REQUEST_URL } from "@api/routes";
 import { NavigateFunction } from "react-router-dom";
 
 export async function searchFriends(

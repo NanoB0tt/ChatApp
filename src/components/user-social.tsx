@@ -14,7 +14,7 @@ import { SearchFriends } from "./search-friends";
 import { FriendRequests } from "./friend-requests";
 import { useState } from "react";
 
-export default function UserSocial() {
+export function UserSocial() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isSearching, setSearching] = useState(false);
   return (

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { FriendRequest } from "../context/interfaces";
+import { FriendRequest } from "@context/interfaces";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { FriendProfile } from "./friend-profile";
-import { useFriends } from "../context/friend-context";
-import { useAuth } from "../context";
+import { useAuth, useFriends } from "@context";
 import { nanoid } from "nanoid";
 import {
   getFriendRequests,

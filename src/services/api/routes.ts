@@ -11,3 +11,4 @@ export const REQUEST_ROOM = "/api/user/room/";
 export const ADD_MESSAGE = "/api/chat/addMessage";
 export const GET_MESSAGES = "/api/chat/getAllMessages/";
 export const FILE_URL = "/api/files/upload";
+export const BASE_URL = import.meta.env.VITE_BASE_URL;

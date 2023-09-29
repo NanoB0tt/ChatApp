@@ -1,0 +1,9 @@
+export { ChangeUserProfile } from "./change-user-profile";
+export { FriendProfile } from "./friend-profile";
+export { FriendRequests } from "./friend-requests";
+export { Friends } from "./friends";
+export { SearchFriends } from "./search-friends";
+export { Sidebar } from "./sidebar";
+export { UserContainer } from "./user-container";
+export { UserProfile } from "./user-profile";
+export { UserSocial } from "./user-social";

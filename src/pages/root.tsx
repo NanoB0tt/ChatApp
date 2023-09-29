@@ -1,5 +1,5 @@
 import { Container } from "@chakra-ui/react";
-import { Sidebar } from "../components/sidebar";
+import { Sidebar } from "@components";
 import { Outlet } from "react-router-dom";
 
 export function Root() {

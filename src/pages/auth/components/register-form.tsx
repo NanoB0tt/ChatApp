@@ -9,10 +9,10 @@ import {
 import { useForm } from "react-hook-form";
 import { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useAxiosPrivate } from "../../../hooks/useAxiosPrivate";
+import { useAxiosPrivate } from "@customHooks";
 import { useState } from "react";
-import { notification } from "./notify";
-import { REGISTER_URL } from "../../../api/routes";
+import { notification } from "./helpers/notify";
+import { REGISTER_URL } from "@api/routes";
 
 export function RegisterForm() {
   const axiosPrivate = useAxiosPrivate();
