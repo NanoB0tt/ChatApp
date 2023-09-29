@@ -3,8 +3,8 @@ import { FormLayout } from "./layout/form-layout";
 
 export function Login() {
   return (
-    <FormLayout type='login'>
+    <FormLayout type="login">
       <LoginForm />
     </FormLayout>
-  )
+  );
 }

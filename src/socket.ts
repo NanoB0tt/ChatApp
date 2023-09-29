@@ -5,6 +5,6 @@ const socket = io(BASE_URL, { autoConnect: false });
 
 socket.onAny((event, ...args) => {
   console.log(event, args);
-})
+});
 
 export default socket;
