@@ -18,7 +18,7 @@
       "@chat/components": ["./src/pages/chat/components/index.ts"],
       "@api/axios": ["./src/services/api/axios.ts"],
       "@api/routes": ["./src/services/api/routes.ts"],
-      "@socket": ["./src/services/socket/socket.ts"],
+      "@socket": ["./src/services/socket/socket.ts"]
     },
 
     /* Bundler mode */

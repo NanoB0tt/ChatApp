@@ -22,9 +22,7 @@ export async function getUser(
   }
 }
 
-export async function getRoom(
-  params: { id: string },
-) {
+export async function getRoom(params: { id: string }) {
   try {
     const response = await axiosPrivate.get(REQUEST_ROOM + params.id);
     const roomData = response.data.room;
@@ -35,9 +33,7 @@ export async function getRoom(
   }
 }
 
-export async function getAllMessages(
-  room: string | undefined,
-) {
+export async function getAllMessages(room: string | undefined) {
   if (room) {
     try {
       const response = await axiosPrivate.get(GET_MESSAGES + room);
