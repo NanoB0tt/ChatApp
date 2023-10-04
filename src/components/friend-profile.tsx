@@ -1,6 +1,8 @@
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
-import { User } from "@context/interfaces";
 import { ReactNode } from "react";
+
+import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
+
+import { User } from "@context/interfaces";
 
 interface Props {
   friend: User;

@@ -1,7 +1,9 @@
-import { Friends } from "./friends";
 import { Box } from "@chakra-ui/react";
+
+import { useFriends } from "@context/index";
+
+import { Friends } from "./friends";
 import { UserContainer } from "./user-container";
-import { useFriends } from "@context";
 
 export function Sidebar() {
   const { selectedFriend } = useFriends();

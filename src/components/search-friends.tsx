@@ -1,12 +1,15 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { User } from "@context/interfaces";
-import { Box, Button, Input } from "@chakra-ui/react";
-import { FriendProfile } from "./friend-profile";
-import { nanoid } from "nanoid";
-import { searchFriends, sendFriendRequest } from "./helpers/search-friends";
-import { useAuth } from "@context";
-import { useDebounce } from "@customHooks";
 import { useNavigate } from "react-router-dom";
+
+import { Box, Button, Input } from "@chakra-ui/react";
+
+import { useAuth } from "@context/index";
+import { User } from "@context/interfaces";
+import { useDebounce } from "@customHooks";
+import { nanoid } from "nanoid";
+
+import { searchFriends, sendFriendRequest } from "./helpers/search-friends";
+import { FriendProfile } from "./friend-profile";
 
 interface Props {
   setSearching: Dispatch<SetStateAction<boolean>>;

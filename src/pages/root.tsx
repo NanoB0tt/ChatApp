@@ -1,6 +1,8 @@
-import { Container } from "@chakra-ui/react";
-import { Sidebar } from "@components";
 import { Outlet } from "react-router-dom";
+
+import { Container } from "@chakra-ui/react";
+
+import { Sidebar } from "@components";
 
 export function Root() {
   return (

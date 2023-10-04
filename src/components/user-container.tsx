@@ -1,4 +1,5 @@
 import { Flex } from "@chakra-ui/react";
+
 import { UserProfile } from "./user-profile";
 import { UserSocial } from "./user-social";
 

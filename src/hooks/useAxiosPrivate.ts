@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+
 import { axiosPrivate } from "@api/axios";
+
 import { useAuth } from "../context";
 
 export function useAxiosPrivate() {

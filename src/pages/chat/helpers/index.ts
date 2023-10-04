@@ -1,4 +1,5 @@
 import { NavigateFunction } from "react-router-dom";
+
 import { axiosPrivate } from "@api/axios";
 import { GET_MESSAGES, REQUEST_ROOM, REQUEST_USER } from "@api/routes";
 import socket from "@socket";
@@ -17,7 +18,7 @@ export async function getUser(
     const response = await axiosPrivate.get(REQUEST_USER + params.id);
     return response.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err); TODO: handle this error
     navigate("/login");
   }
 }
@@ -29,7 +30,7 @@ export async function getRoom(params: { id: string }) {
     socket.emit("joinRoom", roomData);
     return roomData;
   } catch (err) {
-    console.log(err);
+    // console.log(err); TODO: handle this error
   }
 }
 
@@ -39,7 +40,7 @@ export async function getAllMessages(room: string | undefined) {
       const response = await axiosPrivate.get(GET_MESSAGES + room);
       return response.data;
     } catch (err) {
-      console.log(err);
+      // console.log(err); TODO: handle this error
     }
   }
 }

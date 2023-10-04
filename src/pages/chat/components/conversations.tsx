@@ -1,8 +1,11 @@
 import { UnorderedList } from "@chakra-ui/react";
-import { Messages } from "../helpers";
-import { useAuth } from "@context";
-import { MessageBubbles } from "./message-bubbles";
+
+import { useAuth } from "@context/index";
 import { nanoid } from "nanoid";
+
+import { Messages } from "../helpers";
+
+import { MessageBubbles } from "./message-bubbles";
 
 export function Conversations({
   messages,

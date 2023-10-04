@@ -10,14 +10,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@components": ["./src/components/index.ts"],
-      "@context": ["src/context/index.ts"],
-      "@context/interfaces": ["./src/context/interfaces.ts"],
+      "@context/*": ["src/context/*"],
       "@customHooks": ["./src/hooks/index.ts"],
       "@pages/*": ["./src/pages/*"],
-      "@auth/components": ["./src/pages/auth/components/*"],
-      "@chat/components": ["./src/pages/chat/components/index.ts"],
-      "@api/axios": ["./src/services/api/axios.ts"],
-      "@api/routes": ["./src/services/api/routes.ts"],
+      "@api/*": ["./src/services/api/*"],
       "@socket": ["./src/services/socket/socket.ts"]
     },
 

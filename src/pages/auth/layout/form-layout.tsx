@@ -1,14 +1,15 @@
+import { ReactNode } from "react";
+import { Link as LinkRoute } from "react-router-dom";
+
 import {
-  Flex,
   Box,
-  Stack,
+  Flex,
   Heading,
+  Link,
+  Stack,
   Text,
   useColorModeValue,
-  Link,
 } from "@chakra-ui/react";
-import { Link as LinkRoute } from "react-router-dom";
-import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;

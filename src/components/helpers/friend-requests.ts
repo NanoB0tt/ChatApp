@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
+import { NavigateFunction } from "react-router-dom";
+
 import { axiosPrivate } from "@api/axios";
 import { RECEIVED_REQUEST_URL, RESPOND_FRIEND_REQUEST_URL } from "@api/routes";
 import { FriendRequest, User } from "@context/interfaces";
 import socket from "@socket";
-import { NavigateFunction } from "react-router-dom";
 
 export async function getFriendRequests(
   setFriendRequests: Dispatch<SetStateAction<FriendRequest[] | undefined>>,
@@ -12,7 +13,7 @@ export async function getFriendRequests(
     const response = await axiosPrivate.get(RECEIVED_REQUEST_URL);
     setFriendRequests(response.data);
   } catch (error) {
-    console.log(error);
+    // console.log(err); TODO: handle this error
   }
 }
 
@@ -44,7 +45,7 @@ export async function respondToFriendRequest(
       socket.emit("responseToRequest", auth);
     }
   } catch (error) {
-    console.log(error);
+    // console.log(err); TODO: handle this error
     navigate("/login");
   }
 }

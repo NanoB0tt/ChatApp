@@ -1,11 +1,14 @@
-import socket from "@socket";
-import { Button, Flex, Input, FormControl } from "@chakra-ui/react";
-import { axiosPrivate } from "@api/axios";
-import { useForm } from "react-hook-form";
-import { Messages } from "../helpers";
 import { Dispatch, SetStateAction } from "react";
-import { ADD_MESSAGE } from "@api/routes";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
+import { Button, Flex, FormControl, Input } from "@chakra-ui/react";
+
+import { axiosPrivate } from "@api/axios";
+import { ADD_MESSAGE } from "@api/routes";
+import socket from "@socket";
+
+import { Messages } from "../helpers";
 
 interface Props {
   messages: Messages[] | undefined;
@@ -32,7 +35,7 @@ export function SendMessage({ messages, setMessages, room }: Props) {
         roomId: room,
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err); TODO: handle this error
       navigate("/login");
     }
   }

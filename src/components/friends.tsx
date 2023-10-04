@@ -1,11 +1,14 @@
 import { useEffect } from "react";
-import { User } from "@context/interfaces";
-import { Box } from "@chakra-ui/react";
-import { nanoid } from "nanoid";
 import { Link as LinkRoute } from "react-router-dom";
-import { FriendProfile } from "./friend-profile";
-import { useAuth, useFriends } from "@context";
+
+import { Box } from "@chakra-ui/react";
+
+import { useAuth, useFriends } from "@context/index";
+import { User } from "@context/interfaces";
+import { nanoid } from "nanoid";
+
 import { addFriend, getFriends } from "./helpers/friends";
+import { FriendProfile } from "./friend-profile";
 
 export function Friends() {
   const { friends, setFriends } = useFriends();

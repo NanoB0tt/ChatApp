@@ -1,7 +1,10 @@
 import { RouterProvider } from "react-router-dom";
+
 import { ChakraProvider } from "@chakra-ui/react";
+
+import { AuthProvider, FriendProvider } from "@context/index";
+
 import { router } from "./routes";
-import { AuthProvider, FriendProvider } from "@context";
 import { theme } from "./theme.breakpoints";
 
 export default function App() {

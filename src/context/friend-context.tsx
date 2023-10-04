@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+
 import { FriendContextProps, FriendProviderProps, User } from "./interfaces";
 
 const FriendContext = createContext<FriendContextProps | undefined>(undefined);

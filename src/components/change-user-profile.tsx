@@ -1,3 +1,7 @@
+import { useRef } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 import {
   AlertDialog,
   AlertDialogBody,
@@ -9,12 +13,10 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import { useAxiosPrivate } from "@customHooks";
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
-import { useAuth } from "@context";
+
 import { FILE_URL } from "@api/routes";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "@context/index";
+import { useAxiosPrivate } from "@customHooks";
 
 interface AlertProps {
   isOpen: boolean;
@@ -43,7 +45,7 @@ export function ChangeUserProfile({ isOpen, onClose }: AlertProps) {
       });
       auth && setAuth({ ...auth, imagePath: photoData.data.secureUrl });
     } catch (err) {
-      console.log(err);
+      // console.log(err); TODO: handle this error
       navigate("/login");
     }
   }

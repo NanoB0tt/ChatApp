@@ -1,11 +1,13 @@
 import {
-  Route,
   createBrowserRouter,
   createRoutesFromElements,
+  Route,
 } from "react-router-dom";
-import { Root, ErrorPage } from "@pages/index";
+
 import { Login, Register } from "@pages/auth";
-import { Chat } from "@pages/chat/chat";
+import { Chat } from "@pages/chat";
+import { ErrorPage,Root } from "@pages/index";
+
 import { RequireAuth } from ".";
 
 export const router = createBrowserRouter(

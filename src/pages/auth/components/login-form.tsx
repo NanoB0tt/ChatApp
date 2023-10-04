@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 import {
   Button,
   FormControl,
@@ -6,16 +11,16 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@context";
-import { User } from "@context/interfaces";
-import socket from "@socket";
-import { useState } from "react";
-import { useAxiosPrivate } from "@customHooks";
-import { notification } from "./helpers/notify";
-import { Toaster } from "react-hot-toast";
+
 import { LOGIN_URL } from "@api/routes";
+import { useAuth } from "@context/index";
+import { User } from "@context/interfaces";
+import { useAxiosPrivate } from "@customHooks";
+import socket from "@socket";
+import { AxiosError } from "axios";
+
+import { notification } from "../helpers/notify";
+import { LoginInput } from "../interfaces/interfaces";
 
 export function LoginForm() {
   const axiosPrivate = useAxiosPrivate();
@@ -24,9 +29,9 @@ export function LoginForm() {
   const [errEmail, setErrEmail] = useState(false);
   const [errPass, setErrPass] = useState(false);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<LoginInput>();
 
-  async function onSubmit(data: any): Promise<void> {
+  async function onSubmit(data: LoginInput): Promise<void> {
     try {
       const res = await axiosPrivate.post<User>(
         LOGIN_URL,
@@ -42,14 +47,16 @@ export function LoginForm() {
           navigate("/");
         }, 2000);
       }
-    } catch (err: any) {
-      const errMsg = err.response.data.message;
-      if (errMsg.includes("email")) {
-        setErrEmail(true);
-        setErrPass(false);
-      } else if (errMsg.includes("password")) {
-        setErrPass(true);
-        setErrEmail(false);
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        const errMsg = err.response?.data.message;
+        if (errMsg.includes("email")) {
+          setErrEmail(true);
+          setErrPass(false);
+        } else if (errMsg.includes("password")) {
+          setErrPass(true);
+          setErrEmail(false);
+        }
       }
     }
   }

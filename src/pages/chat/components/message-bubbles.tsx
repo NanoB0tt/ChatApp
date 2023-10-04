@@ -1,5 +1,7 @@
 import { Box, ListItem, Text } from "@chakra-ui/react";
+
 import { Messages } from "../helpers";
+
 interface Props {
   isMe: boolean;
   message: Messages;

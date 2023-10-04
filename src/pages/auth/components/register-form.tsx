@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 import {
   Button,
   FormControl,
@@ -6,13 +11,13 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { useAxiosPrivate } from "@customHooks";
-import { useState } from "react";
-import { notification } from "./helpers/notify";
+
 import { REGISTER_URL } from "@api/routes";
+import { useAxiosPrivate } from "@customHooks";
+import { AxiosError } from "axios";
+
+import { notification } from "../helpers/notify";
+import { RegisterInput } from "../interfaces/interfaces";
 
 export function RegisterForm() {
   const axiosPrivate = useAxiosPrivate();
@@ -23,9 +28,9 @@ export function RegisterForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<RegisterInput>();
 
-  async function onSubmit(data: any): Promise<void> {
+  async function onSubmit(data: RegisterInput): Promise<void> {
     try {
       const res = await axiosPrivate.post(REGISTER_URL, JSON.stringify(data));
       if (res.status === 201) {
@@ -35,8 +40,11 @@ export function RegisterForm() {
           navigate("/login/");
         }, 2000);
       }
-    } catch (err: any) {
-      if (err.response.data.message.includes("already exists")) {
+    } catch (err) {
+      if (
+        err instanceof AxiosError &&
+        err.response?.data.message.includes("already exists")
+      ) {
         setAlreadyExist(true);
       }
     }

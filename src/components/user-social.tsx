@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { FaUserPlus } from "react-icons/fa";
+
 import {
   Box,
   Button,
@@ -9,10 +12,9 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FaUserPlus } from "react-icons/fa";
-import { SearchFriends } from "./search-friends";
+
 import { FriendRequests } from "./friend-requests";
-import { useState } from "react";
+import { SearchFriends } from "./search-friends";
 
 export function UserSocial() {
   const { isOpen, onOpen, onClose } = useDisclosure();

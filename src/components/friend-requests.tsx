@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { FriendRequest } from "@context/interfaces";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
-import { FriendProfile } from "./friend-profile";
-import { useAuth, useFriends } from "@context";
+import { Box, Button, Flex } from "@chakra-ui/react";
+
+import { useAuth, useFriends } from "@context/index";
+import { FriendRequest } from "@context/interfaces";
 import { nanoid } from "nanoid";
+
 import {
   getFriendRequests,
   invitationRecieved,
   respondToFriendRequest,
 } from "./helpers/friend-requests";
-import { useNavigate } from "react-router-dom";
+import { FriendProfile } from "./friend-profile";
 
 export function FriendRequests() {
   const [friendRequests, setFriendRequests] = useState<FriendRequest[]>();

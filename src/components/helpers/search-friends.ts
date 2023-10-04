@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
-import { axiosPrivate } from "@api/axios";
-import socket from "@socket";
-import { User } from "@context/interfaces";
-import { SEARCH_FRIENDS_URL, SEND_FRIEND_REQUEST_URL } from "@api/routes";
 import { NavigateFunction } from "react-router-dom";
+
+import { axiosPrivate } from "@api/axios";
+import { SEARCH_FRIENDS_URL, SEND_FRIEND_REQUEST_URL } from "@api/routes";
+import { User } from "@context/interfaces";
+import socket from "@socket";
 
 export async function searchFriends(
   searchValue: string,
@@ -22,7 +23,7 @@ export async function searchFriends(
       setSearching(false);
     }
   } catch (error) {
-    console.log(error);
+    // console.log(err); TODO: handle this error
     navigate("/login");
   }
 }
@@ -32,6 +33,6 @@ export async function sendFriendRequest(id: string, auth: User | null) {
     await axiosPrivate.post(SEND_FRIEND_REQUEST_URL + id);
     socket.emit("invitationSend", auth);
   } catch (error) {
-    console.log(error);
+    // console.log(err); TODO: handle this error
   }
 }

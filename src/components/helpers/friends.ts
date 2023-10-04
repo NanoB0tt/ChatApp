@@ -1,7 +1,8 @@
 import { Dispatch } from "react";
+
 import { axiosPrivate } from "@api/axios";
-import { User } from "@context/interfaces";
 import { REQUEST_MY_FRIENDS_URL } from "@api/routes";
+import { User } from "@context/interfaces";
 import socket from "@socket";
 
 export async function getFriends(setFriends: Dispatch<User[]>) {
@@ -9,7 +10,7 @@ export async function getFriends(setFriends: Dispatch<User[]>) {
     const response = await axiosPrivate.get(REQUEST_MY_FRIENDS_URL);
     setFriends(response.data);
   } catch (error) {
-    console.log(error);
+    // console.log(err); TODO: handle this error
   }
 }
 export function addFriend(

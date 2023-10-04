@@ -1,5 +1,6 @@
+import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+
 import { Flex, Heading, Text } from "@chakra-ui/react";
-import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
 export function ErrorPage() {
   const error = useRouteError();
@@ -13,7 +14,7 @@ export function ErrorPage() {
   } else if (typeof error === "string") {
     errorMessage = error;
   } else {
-    console.error(error);
+    // console.log(err); TODO: handle this error
     errorMessage = "Unknown error";
   }
 
