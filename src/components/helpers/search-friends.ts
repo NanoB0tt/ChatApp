@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import toast from "react-hot-toast";
 import { NavigateFunction } from "react-router-dom";
 
 import { axiosPrivate } from "@api/axios";
@@ -30,9 +31,19 @@ export async function searchFriends(
 
 export async function sendFriendRequest(id: string, auth: User | null) {
   try {
-    await axiosPrivate.post(SEND_FRIEND_REQUEST_URL + id);
+    const response = await axiosPrivate.post(SEND_FRIEND_REQUEST_URL + id);
+    if (Object.keys(response.data).includes("error")) {
+      notifyError(response.data.error);
+    }
     socket.emit("invitationSend", auth);
   } catch (error) {
     // console.log(err); TODO: handle this error
   }
+}
+
+function notifyError(error: string) {
+  toast.error(
+    `${error}`,
+    { duration: 2000 },
+  );
 }

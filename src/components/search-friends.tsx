@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import { Box, Button, Input } from "@chakra-ui/react";
@@ -58,6 +59,7 @@ export function SearchFriends({ setSearching }: Props) {
           ))}
         </Box>
       )}
+      <Toaster />
     </Box>
   );
 }

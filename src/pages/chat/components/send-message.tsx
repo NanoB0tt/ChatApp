@@ -17,7 +17,7 @@ interface Props {
 }
 
 export function SendMessage({ messages, setMessages, room }: Props) {
-  const { register, handleSubmit } = useForm<{ message: string }>();
+  const { register, handleSubmit, setValue } = useForm<{ message: string }>();
   const navigate = useNavigate();
 
   async function onSubmit({ message }: { message: string }) {
@@ -34,6 +34,7 @@ export function SendMessage({ messages, setMessages, room }: Props) {
         createdAt: newMessage.createdAt,
         roomId: room,
       });
+      setValue("message", "");
     } catch (err) {
       // console.log(err); TODO: handle this error
       navigate("/login");
@@ -54,6 +55,7 @@ export function SendMessage({ messages, setMessages, room }: Props) {
           <Input
             type="text"
             backgroundColor="hsl(213.3, 13.4%, 13.1%, 0.74)"
+            autoComplete="off"
             outline="none"
             border="none"
             color="inherit"

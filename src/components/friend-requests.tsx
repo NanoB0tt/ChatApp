@@ -55,7 +55,7 @@ export function FriendRequests() {
                   respondToFriendRequest(friend.id, "accepted", auth, navigate);
                   setFriendRequests(
                     friendRequests.filter(
-                      (req) => req.creator.id !== request.creator.id,
+                      (req) => req.creator.id !== friend.id,
                     ),
                   );
                   friends && setFriends([...friends, friend]);
@@ -70,7 +70,7 @@ export function FriendRequests() {
                   respondToFriendRequest(friend.id, "rejected", auth, navigate);
                   setFriendRequests(
                     friendRequests.filter(
-                      (req) => req.creator.id !== request.creator.id,
+                      (req) => req.creator.id !== friend.id,
                     ),
                   );
                 }}
