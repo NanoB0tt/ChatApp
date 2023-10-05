@@ -26,7 +26,7 @@ export interface FriendContextProps {
   friends: User[] | null;
   setFriends: Dispatch<User[]>;
   selectedFriend: string | undefined;
-  setSelectedFriend: Dispatch<string>;
+  setSelectedFriend: Dispatch<string | undefined>;
 }
 
-export interface FriendProviderProps extends AuthProviderProps { }
+export type FriendProviderProps = AuthProviderProps;

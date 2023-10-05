@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import socket from "../../socket";
-import { Box, Container } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
-import { User } from "../../context/interfaces";
-import { useAuth } from "../../context";
-import { FriendProfile } from "../../components/friend-profile";
-import { Messages, getAllMessages, getRoom, getUser } from "./helpers";
-import { SendMessage } from "./components/send-message";
-import { Conversations } from "./components/conversations";
-import { useFriends } from "../../context/friend-context";
+import { AiFillHome } from "react-icons/ai";
+import { useNavigate, useParams } from "react-router-dom";
 
+import { Box, Button, Container } from "@chakra-ui/react";
+
+import { FriendProfile } from "@components";
+import { useAuth, useFriends } from "@context/index";
+import { User } from "@context/interfaces";
+import socket from "@socket";
+
+import { Conversations,SendMessage } from "./components";
+import { getAllMessages, getRoom, getUser,Messages } from "./helpers";
 
 export function Chat() {
   const [messages, setMessages] = useState<Messages[]>();
@@ -19,9 +20,10 @@ export function Chat() {
   const { auth } = useAuth();
   const { setSelectedFriend } = useFriends();
   const isHeader = true;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    socket.on('privateMessage', (data) => {
+    socket.on("privateMessage", (data) => {
       if (data.from !== auth?.id) {
         if (messages) {
           setMessages([...messages, data]);
@@ -30,58 +32,67 @@ export function Chat() {
         }
       }
     });
-
-  }, [messages])
+  }, [messages]);
 
   useEffect(() => {
-
     async function get() {
-      setUser(await getUser(params));
-      setRoom(await getRoom(params));
+      const [user, newRoom, messages] = await Promise.all([
+        getUser(params, navigate),
+        getRoom(params),
+        getAllMessages(room),
+      ]);
+      setUser(user);
+      setRoom(newRoom);
       setSelectedFriend(params.id);
-      if (room) {
-        setMessages(await getAllMessages(room));
-      }
+      setMessages(messages);
     }
-
     get();
-  }, [params, room])
+  }, [params, room]);
 
   return (
     <Container
-      ml='0'
-      mr='0'
-      maxW='100vw'
-      h='100vh'
-      display='grid'
-      gridTemplateRows='4.5rem 1fr 5rem'
-      padding='0'
-      backgroundImage='/waves2.svg'
-      backgroundRepeat='no-repeat'
-      backgroundSize='cover'
-      backdropBlur='sm'
+      ml="0"
+      mr="0"
+      maxW="100vw"
+      h="100vh"
+      display="grid"
+      gridTemplateRows="4.5rem 1fr 3rem"
+      padding="0"
+      backgroundImage="/waves2.svg"
+      backgroundRepeat="no-repeat"
+      backgroundSize="cover"
+      backdropBlur="sm"
     >
-      {user &&
-        <FriendProfile
-          friend={user}
-          isHeader={isHeader}
-        >
-        </FriendProfile>}
+      {user && (
+        <FriendProfile friend={user} isHeader={isHeader}>
+          <Button
+            borderRadius="full"
+            display={{ base: "flex", lg: "none" }}
+            padding="0rem"
+            onClick={() => {
+              setSelectedFriend(undefined);
+              navigate("/");
+            }}
+          >
+            <AiFillHome />
+          </Button>
+        </FriendProfile>
+      )}
       <Box
-        overflowY='scroll'
-        padding='2rem 5rem 0.5rem'
-        gridRow='1/3'
-        gridColumn='1/2'
+        overflowY="scroll"
+        padding={{ base: "2rem 1rem 0.5rem", lg: "2rem 5rem 0.5rem" }}
+        gridRow={{ base: "2/3", lg: "1/3" }}
+        gridColumn="1/2"
         sx={{
-          '&::-webkit-scrollbar': {
-            width: '4px',
+          "&::-webkit-scrollbar": {
+            width: "4px",
           },
-          '&::-webkit-scrollbar-track': {
-            width: '6px',
+          "&::-webkit-scrollbar-track": {
+            width: "6px",
           },
-          '&::-webkit-scrollbar-thumb': {
-            background: 'hsl(203.1, 25.5%, 90%)',
-            borderRadius: '24px',
+          "&::-webkit-scrollbar-thumb": {
+            background: "hsl(203.1, 25.5%, 90%)",
+            borderRadius: "24px",
           },
         }}
       >
@@ -89,6 +100,5 @@ export function Chat() {
       </Box>
       <SendMessage messages={messages} setMessages={setMessages} room={room} />
     </Container>
-  )
+  );
 }
-
