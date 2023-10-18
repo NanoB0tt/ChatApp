@@ -22,8 +22,9 @@ export function addFriend(
     if (auth?.id !== message.id) {
       if (friends) {
         setFriends([...friends, message]);
+      } else {
+        setFriends([message]);
       }
-      setFriends([message]);
     }
   });
 }

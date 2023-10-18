@@ -9,8 +9,8 @@ import { useAuth, useFriends } from "@context/index";
 import { User } from "@context/interfaces";
 import socket from "@socket";
 
-import { Conversations,SendMessage } from "./components";
-import { getAllMessages, getRoom, getUser,Messages } from "./helpers";
+import { Conversations, SendMessage } from "./components";
+import { getAllMessages, getRoom, getUser, Messages } from "./helpers";
 
 export function Chat() {
   const [messages, setMessages] = useState<Messages[]>();
@@ -80,7 +80,7 @@ export function Chat() {
       )}
       <Box
         overflowY="scroll"
-        padding={{ base: "2rem 1rem 0.5rem", lg: "2rem 5rem 0.5rem" }}
+        padding={{ base: "2rem 1rem 0.5rem", lg: "7rem 5rem 0.5rem" }}
         gridRow={{ base: "2/3", lg: "1/3" }}
         gridColumn="1/2"
         sx={{

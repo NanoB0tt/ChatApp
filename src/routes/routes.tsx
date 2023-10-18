@@ -6,7 +6,7 @@ import {
 
 import { Login, Register } from "@pages/auth";
 import { Chat } from "@pages/chat";
-import { ErrorPage,Root } from "@pages/index";
+import { ErrorPage, Root } from "@pages/index";
 
 import { RequireAuth } from ".";
 
