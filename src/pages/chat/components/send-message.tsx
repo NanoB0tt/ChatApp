@@ -46,7 +46,7 @@ export function SendMessage({ messages, setMessages, room }: Props) {
       <FormControl height={{ base: "100%" }}>
         <Flex
           alignSelf="end"
-          alignItems={{ base: "flex-end", lg: "normal" }}
+          alignItems="normal"
           gap={{ base: "0.3rem", lg: "0.7rem" }}
           width="100%"
           height="100%"

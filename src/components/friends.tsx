@@ -11,14 +11,16 @@ import { addFriend, getFriends } from "./helpers/friends";
 import { FriendProfile } from "./friend-profile";
 
 export function Friends() {
-  const { friends, setFriends } = useFriends();
+  const { friends, setFriends, selectedFriend } = useFriends();
   const { auth } = useAuth();
-  const { selectedFriend } = useFriends();
 
   useEffect(() => {
     getFriends(setFriends);
-    addFriend(friends, setFriends, auth);
   }, []);
+
+  useEffect(() => {
+    addFriend(friends, setFriends, auth);
+  }, [friends]);
 
   return (
     <Box

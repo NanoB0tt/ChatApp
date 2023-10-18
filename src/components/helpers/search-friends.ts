@@ -42,8 +42,5 @@ export async function sendFriendRequest(id: string, auth: User | null) {
 }
 
 function notifyError(error: string) {
-  toast.error(
-    `${error}`,
-    { duration: 2000 },
-  );
+  toast.error(`${error}`, { duration: 2000 });
 }
